@@ -100,7 +100,7 @@ export async function getServerSideProps({ req, res, params }) {
   const searchLink = json.verify(params.searchLink, "thisSiteisWebScrapedLol");
 
   const response = await axios.post(
-    "http://localhost:3000/api/getNovelBySearch",
+    "https://web-novel-project.vercel.app/api/getNovelBySearch",
     { link: searchLink }
   );
 

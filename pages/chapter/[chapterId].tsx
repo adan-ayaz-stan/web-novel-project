@@ -116,9 +116,12 @@ export async function getServerSideProps({ req, res, params }) {
 
   console.log(decryptedString);
 
-  const request = await axios.post("http://localhost:3000/api/getChapter", {
-    pageRoute: decryptedString.link,
-  });
+  const request = await axios.post(
+    "https://web-novel-project.vercel.app/api/getChapter",
+    {
+      pageRoute: decryptedString.link,
+    }
+  );
 
   const prevChapterLink = json.verify(
     request.data.links.prevChapter,
