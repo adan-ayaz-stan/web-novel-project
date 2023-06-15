@@ -1,0 +1,37 @@
+{
+  "name": "nextweb-agency-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
+    "bcrypt": "^5.1.0",
+    "cheerio": "^1.0.0-rc.12",
+    "eslint": "8.38.0",
+    "eslint-config-next": "13.3.0",
+    "framer-motion": "^10.11.6",
+    "jsonwebtoken": "^9.0.0",
+    "locomotive-scroll": "^4.1.4",
+    "next": "13.3.0",
+    "postcss": "8.4.21",
+    "react": "18.2.0",
+    "react-animated-cursor": "^2.5.2",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.8.0",
+    "react-scroll-parallax": "^3.4.2",
+    "recoil": "^0.7.7",
+    "scroller-motion": "^1.2.3",
+    "swiper": "^9.3.2",
+    "tailwindcss": "3.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.2.5",
+    "@types/react": "18.2.8"
+  }
+}
