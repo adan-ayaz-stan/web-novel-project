@@ -1,14 +1,16 @@
+import Image from "next/image";
+import { useEffect } from "react";
 import axios from "axios";
 import * as json from "jsonwebtoken";
-import Image from "next/image";
 
-import { Montserrat } from "next/font/google";
+import NovelChapters from "../../components/NovelPage/NovelChapters";
+import NavigationBar from "../../components/Layout/NavigationBar";
 
 import { BiArrowToRight } from "react-icons/bi";
-import NovelChapters from "../../components/NovelPage/NovelChapters";
-import { useEffect } from "react";
 
+import { Montserrat } from "next/font/google";
 const montserrat = Montserrat({ weight: "700", subsets: ["latin"] });
+
 export default function Novel({ searchLink, data }) {
   async function addNovelToPublicSearchedNovelPanel(title, link, novelId, img) {
     const response = await axios.post("/api/addNovelToPublicSearched", {
@@ -32,7 +34,7 @@ export default function Novel({ searchLink, data }) {
 
   return (
     <>
-      {/* <NavigationBar /> */}
+      <NavigationBar />
       <div className="flex flex-col gap-4 justify-center items-center px-0 md:px-[5%] lg:px-[15%] py-6">
         {/* Hero Section */}
         <div className="w-full flex flex-col items-center md:flex-row gap-6">

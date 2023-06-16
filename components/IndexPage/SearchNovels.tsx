@@ -23,8 +23,15 @@ export default function SearchNovels() {
   }, [keyword]);
 
   return (
-    <div className="flex flex-col gap-3 pt-20">
-      <h1 className="font-bold text-xl text-center">Search novels</h1>
+    <div className="flex flex-col gap-3">
+      <h1 className="font-bold text-xl text-center leading-[1em]">
+        Search novels
+      </h1>
+      <span className="text-gray-600 text-sm text-center">
+        You can search new novels from the database. <br />
+        All novels searched will appear in the public searched novels section
+        below.
+      </span>
       <div className="relative w-full md:w-3/4 lg:w-1/2 mx-auto group flex items-center gap-2 border-2 border-gray-300 focus-within:border-black text-gray-600 focus-within:text-black rounded-md px-2 transition-all duration-700">
         <input
           type="text"

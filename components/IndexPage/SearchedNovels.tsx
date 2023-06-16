@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import * as json from 'jsonwebtoken'
+import * as json from "jsonwebtoken";
 import { BiBookOpen } from "react-icons/bi";
 import dataset from "../../myNovels.json";
 
@@ -10,18 +10,20 @@ export default function Ranking() {
 
   return (
     <div className="mt-4 flex flex-col gap-2 py-12">
-      <h1>
-        Public Searched Novels <br />
-        <span className="text-[12px]">Latest searched appear first</span>
+      <h1 className="text-center">
+        <span className="font-bold text-xl">Public Searched Novels</span> <br />
+        <span className="text-[12px] text-gray-600">
+          Latest searched appears first
+        </span>
       </h1>
       <hr />
 
-      <div className="col-span-9 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 auto-rows-1fr gap-2 p-2">
+      <div className="col-span-9 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 auto-rows-1fr gap-2 p-2">
         {data.map((ele, ind) => {
           return (
             <Link
               href={"/search/" + ele.link}
-              className="col-span-1 p-2 px-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-700"
+              className="col-span-1 p-2 px-4 rounded-xl shadow-md border-2 border-gray-200 hover:border-black transition-all duration-700"
               key={"weekly-featured" + ind + 1}
             >
               <div className="relative h-40 w-full mb-2">
