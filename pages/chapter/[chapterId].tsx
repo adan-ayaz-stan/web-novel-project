@@ -127,7 +127,7 @@ export async function getServerSideProps({ req, res, params }) {
   console.log(decryptedString);
 
   const request = await axios.post(
-    "https://web-novel-project.vercel.app/api/getChapter",
+    "https://spitfirenovelpub.vercel.app/api/getChapter",
     {
       pageRoute: decryptedString.link,
     }
