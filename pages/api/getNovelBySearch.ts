@@ -48,6 +48,4 @@ export default async function handler(req: NextApiRequest,res:NextApiResponse) {
             latestChapter: chapterInfoValue
           })
     })
-
-    res.status(200).json({name: "John Does"})
 }
