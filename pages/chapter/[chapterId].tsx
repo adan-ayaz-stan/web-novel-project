@@ -34,7 +34,7 @@ const ChapterPage = ({ data, title, disableChapter }) => {
   }
 
   useEffect(() => {
-    if (window.innerWidth < 920) {
+    if (window.innerWidth > 920) {
       setEnabled(true);
     }
   }, []);
