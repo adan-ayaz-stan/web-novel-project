@@ -18,6 +18,8 @@ const coda = Overlock({ weight: "400", subsets: ["latin"] });
 const ChapterPage = ({ data, title, disableChapter }) => {
   const router = useRouter();
 
+  const [isEnabled, setEnabled] = useState(false);
+
   function goToPrevChapter() {
     console.log("/chapter/" + data.links.prevChapter);
     router.push("/chapter/" + data.links.prevChapter);
@@ -31,8 +33,14 @@ const ChapterPage = ({ data, title, disableChapter }) => {
     router.push("/");
   }
 
+  useEffect(() => {
+    if (window.innerWidth < 920) {
+      setEnabled(true);
+    }
+  }, []);
+
   return (
-    <ScrollerMotion>
+    <ScrollerMotion disabled={!isEnabled}>
       <div className="flex flex-col gap-6 px-2 md:px-[5%] lg:px-[15%] py-6 md:py-9 lg:py-12">
         <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-6 md:gap-3">
           <h2
