@@ -12,12 +12,16 @@ import {
 } from "react-icons/bi";
 import { ScrollerMotion } from "scroller-motion";
 import NavigationBar from "../../components/Layout/NavigationBar";
+import { useRecoilValue } from "recoil";
+import { darkMode } from "../../stores/darkmode";
 
 const lobster = Lobster({ weight: "400", subsets: ["latin"] });
 const coda = Overlock({ weight: "400", subsets: ["latin"] });
 
 const ChapterPage = ({ data, title, disableChapter }) => {
   const router = useRouter();
+
+  const darkModeValue = useRecoilValue(darkMode);
 
   const [isEnabled, setEnabled] = useState(false);
 
@@ -41,7 +45,13 @@ const ChapterPage = ({ data, title, disableChapter }) => {
   }, []);
 
   return (
-    <ScrollerMotion disabled={!isEnabled}>
+    <ScrollerMotion
+      style={{
+        color: darkModeValue.textPrimary,
+        background: darkModeValue.bgColor,
+      }}
+      disabled={!isEnabled}
+    >
       <NavigationBar />
       <div className="flex flex-col gap-6 px-2 md:px-[5%] lg:px-[15%] py-6 md:py-9 lg:py-12">
         <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-6 md:gap-3">
@@ -74,8 +84,10 @@ const ChapterPage = ({ data, title, disableChapter }) => {
         {data.content.map((ele, ind) => {
           return (
             <p
-              style={coda.style}
-              className="text-lg px-2"
+              style={{
+                color: darkModeValue.textPrimary,
+              }}
+              className={`text-lg px-2 ${coda.className}`}
               key={"chapter-opened-scraped" + ind}
             >
               {ele}

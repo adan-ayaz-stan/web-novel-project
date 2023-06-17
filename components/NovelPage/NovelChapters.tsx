@@ -7,9 +7,13 @@ import Loading from "../Layout/Loading";
 
 import styles from "../../styles/button.module.css";
 import { useRouter } from "next/router";
+import { useRecoilValue } from "recoil";
+import { darkMode } from "../../stores/darkmode";
 
 export default function NovelChapters({ novelID }: { novelID: number }) {
   const router = useRouter();
+
+  const darkModeValue = useRecoilValue(darkMode);
 
   const [isLoading, setLoading] = useState(false);
   const [chapterLinks, setChapterLinks] = useState([]);
@@ -77,14 +81,19 @@ export default function NovelChapters({ novelID }: { novelID: number }) {
   }
 
   return (
-    <div className="mt-12">
+    <div className="h-fit mt-12">
       {/* Latest 5 Chapters */}
       {!isLoading && (
         <>
-          <h2 className="text-center font-bold text-lg">
+          <h2
+            style={{
+              color: darkModeValue.textPrimary,
+            }}
+            className="text-center font-bold text-lg"
+          >
             Latest Chapter Updates
           </h2>
-          <div className="relative max-h-[85vh] w-full flex flex-row flex-wrap justify-center gap-6 mb-12 py-6 px-3 overflow-y-auto">
+          <div className="relative h-fit w-full flex flex-row flex-wrap justify-center gap-6 mb-12 py-6 px-3">
             {allLinks.map((ele, ind) => {
               if (ind < allLinks.length - 5) {
                 return;
@@ -96,7 +105,12 @@ export default function NovelChapters({ novelID }: { novelID: number }) {
                   className="w-[100%] md:w-[45%] lg:w-[30%] flex flex-col gap-2 border-2 px-4 py-3 rounded-lg hover:border-gray-600 transition-all duration-[500ms]"
                   key={"link-novel-chapters-" + ind}
                 >
-                  <h2 className="text-lg font-medium text-gray-600 leading-[1em]">
+                  <h2
+                    style={{
+                      color: darkModeValue.textPrimary,
+                    }}
+                    className="text-lg font-medium leading-[1em]"
+                  >
                     {ele.title}
                   </h2>
                 </Link>
@@ -137,7 +151,8 @@ export default function NovelChapters({ novelID }: { novelID: number }) {
                   <button
                     key={"novel-chapters-" + ind + "pagination"}
                     onClick={() => openTab(ele)}
-                    className="p-2 px-4 hover:bg-blue-700 hover:text-white shadow-md hover:shadow-lg transition-all duration-[500ms] border-r-2 rounded-md"
+                    style={{ color: darkModeValue.textSecondary }}
+                    className="p-2 px-4 hover:bg-blue-700 hover:text-white shadow-md hover:shadow-lg transition-all duration-[500ms] border-r-2 border-l-[1px] rounded-md"
                   >
                     {ind + 1}
                   </button>
@@ -173,7 +188,7 @@ export default function NovelChapters({ novelID }: { novelID: number }) {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="relative max-h-[85vh] w-full flex flex-row flex-wrap justify-center gap-6 my-12 py-6 px-3 overflow-y-auto">
+        <div className="relative w-full flex flex-row flex-wrap justify-center gap-6 my-12 py-6 px-3 overflow-y-auto">
           <>
             {chapterLinks.map((ele, ind) => {
               return (
@@ -182,7 +197,12 @@ export default function NovelChapters({ novelID }: { novelID: number }) {
                   className="w-[100%] md:w-[45%] lg:w-[30%] flex flex-col gap-2 border-2 px-4 py-3 rounded-lg hover:border-gray-600 transition-all duration-[500ms]"
                   key={"link-novel-chapters-" + ind}
                 >
-                  <h2 className="text-lg font-medium text-gray-600 leading-[1em]">
+                  <h2
+                    style={{
+                      color: darkModeValue.textPrimary,
+                    }}
+                    className="text-lg font-medium text-gray-600 leading-[1em]"
+                  >
                     {ele.title}
                   </h2>
                 </Link>

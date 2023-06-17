@@ -9,6 +9,9 @@ import { BiCompass, BiMenuAltRight } from "react-icons/bi";
 
 import logo from "../../assets/svg/logo.svg";
 import { Rancho } from "next/font/google";
+import DarkModeSwitch from "./DarkModeSwitch";
+import { useRecoilValue } from "recoil";
+import { darkMode } from "../../stores/darkmode";
 
 const linksData = [
   {
@@ -26,11 +29,24 @@ const linksData = [
 const nanum = Rancho({ weight: "400", subsets: ["latin"] });
 
 export default function NavigationBar() {
+  const darkModeValue = useRecoilValue(darkMode);
+
   return (
-    <div className="flex justify-center items-center py-4">
-      <h2 style={nanum.style} className="text-3xl underline">
+    <div className="flex flex-col justify-center items-center py-4">
+      <Link
+        style={{
+          color: darkModeValue.textPrimary,
+          fontFamily: nanum.style.fontFamily,
+          fontWeight: nanum.style.fontWeight,
+          fontStyle: nanum.style.fontStyle,
+        }}
+        className="text-3xl underline"
+        href={"/"}
+      >
         {"<<"} Spitfire's Novel Site {">>"}
-      </h2>
+      </Link>
+
+      <DarkModeSwitch />
     </div>
   );
 
