@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import { useEffect } from "react";
 import axios from "axios";
@@ -36,6 +37,9 @@ export default function Novel({ searchLink, data }) {
 
   return (
     <>
+      <Head>
+        <title>Spitfire's Novel Pub | Search</title>
+      </Head>
       <div
         style={{
           background: darkModeValue.bgColor,

@@ -1,10 +1,14 @@
+import Head from "next/head";
+import Link from "next/link";
+import { useRecoilValue } from "recoil";
+
 import NavigationBar from "../components/Layout/NavigationBar";
 import SearchNovels from "../components/IndexPage/SearchNovels";
 import SearchedNovels from "../components/IndexPage/SearchedNovels";
-import Link from "next/link";
-import { Rancho } from "next/font/google";
-import { useRecoilValue } from "recoil";
+
 import { darkMode } from "../stores/darkmode";
+
+import { Rancho } from "next/font/google";
 
 const nanum = Rancho({ weight: "400", subsets: ["latin"] });
 
@@ -13,6 +17,9 @@ export default function Index() {
 
   return (
     <>
+      <Head>
+        <title>Spitfire's Novel Pub</title>
+      </Head>
       <main
         style={{
           backgroundColor: darkModeValue.bgColor,
