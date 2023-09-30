@@ -10,6 +10,8 @@ import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import { darkMode } from "../../stores/darkmode";
 
+import { Button, ConfigProvider, Pagination } from "antd";
+
 export default function NovelChapters({ novelID }: { novelID: number }) {
   const router = useRouter();
 
@@ -21,14 +23,16 @@ export default function NovelChapters({ novelID }: { novelID: number }) {
   const [tab, setTab] = useState(0);
   const [tabs, setTabs] = useState([]);
   const [isReversedChapters, setReversedChapters] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(50);
 
   function divideArrayIntoParts(array: any[]) {
     const result = [];
-    const totalParts = Math.ceil(array.length / 100); // Calculate the total number of parts needed
+    const totalParts = Math.ceil(array.length / pageSize); // Calculate the total number of parts needed
 
     for (let i = 0; i < totalParts; i++) {
-      const start = i * 100;
-      const end = start + 100;
+      const start = i * pageSize;
+      const end = start + pageSize;
       const part = array.slice(start, end); // Extract a part of 100 elements
 
       result.push(part);
@@ -52,21 +56,17 @@ export default function NovelChapters({ novelID }: { novelID: number }) {
     const chaptersInFocus = divideArrayIntoParts(allLinks);
     if (allLinks.length != 0) {
       setTabs(chaptersInFocus);
-      setChapterLinks(chaptersInFocus[tab]);
+      setChapterLinks(chaptersInFocus[tab - 1]);
     }
   }
 
   useEffect(() => {
-    renderChapters(tab);
-  }, [tab, allLinks]);
+    renderChapters(page);
+  }, [page, allLinks]);
 
   useEffect(() => {
     getChapterLinks();
   }, []);
-
-  function openTab(arrayOfChapters: any[]) {
-    setChapterLinks(arrayOfChapters);
-  }
 
   function reverseChapters() {
     setReversedChapters((value) => !value);
@@ -80,8 +80,13 @@ export default function NovelChapters({ novelID }: { novelID: number }) {
     router.push(`/chapter/${allLinks[allLinks.length - 1].obj}`);
   }
 
+  function pageSizeChanged(page: number, pageSize: number) {
+    setPage(page);
+    setPageSize(pageSize);
+  }
+
   return (
-    <div className="h-fit mt-12">
+    <div className="h-fit flex flex-col w-full mt-12">
       {/* Latest 5 Chapters */}
       {!isLoading && (
         <>
@@ -131,7 +136,7 @@ export default function NovelChapters({ novelID }: { novelID: number }) {
       } */}
 
       {!isLoading && (
-        <div className="flex flex-col lg:flex-row gap-12 justify-between items-center">
+        <div className="flex flex-col gap-12 justify-between items-center">
           {/* Left side */}
           <div className="flex flex-col md:flex-row gap-4">
             <button onClick={openFirstChapter} className={styles.button}>
@@ -144,34 +149,26 @@ export default function NovelChapters({ novelID }: { novelID: number }) {
 
           {/* Right side */}
 
-          <div className="flex flex-wrap gap-3 items-center">
-            <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-0 border-gray-200 rounded-lg cursor-pointer">
-              {tabs.map((ele, ind) => {
-                return (
-                  <button
-                    key={"novel-chapters-" + ind + "pagination"}
-                    onClick={() => openTab(ele)}
-                    style={{ color: darkModeValue.textSecondary }}
-                    className="p-2 px-4 hover:bg-blue-700 hover:text-white shadow-md hover:shadow-lg transition-all duration-[500ms] border-r-2 border-l-[1px] rounded-md"
-                  >
-                    {ind + 1}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* <button
-              onClick={reverseChapters}
-              title="Inverse List"
-              className="p-2 px-3 cursor-pointer border-2 hover:border-black border-gray-200 rounded-lg"
-            >
-              {isReversedChapters ? (
-                <BiSortAZ size={24} />
-              ) : (
-                <BiSortZA size={24} />
-              )}
-            </button> */}
-          </div>
+          <ConfigProvider
+            theme={{
+              components: {
+                Pagination: {
+                  itemSize: 32,
+                },
+              },
+              token: {
+                colorPrimary: "#000000",
+                colorPrimaryHover: "#eeeeee",
+              },
+            }}
+          >
+            <Pagination
+              total={allLinks.length}
+              onChange={pageSizeChanged}
+              defaultPageSize={pageSize}
+              defaultCurrent={page}
+            />
+          </ConfigProvider>
         </div>
       )}
 

@@ -12,6 +12,7 @@ import { BiArrowToRight } from "react-icons/bi";
 import { Montserrat } from "next/font/google";
 import { useRecoilValue } from "recoil";
 import { darkMode } from "../../stores/darkmode";
+import { Collapse, ConfigProvider, theme } from "antd";
 const montserrat = Montserrat({ weight: "700", subsets: ["latin"] });
 
 export default function Novel({ searchLink, data }) {
@@ -95,32 +96,37 @@ export default function Novel({ searchLink, data }) {
           </div>
         </div>
 
-        <div className="h-fit">
-          <h2
-            style={{
-              color: darkModeValue.textPrimary,
-            }}
-            className="text-xl px-2 mb-2"
-          >
-            Description
-          </h2>
-          <hr />
-          {/* Description */}
-          <div className="flex flex-col gap-3 py-6 px-2">
-            {data.description.map((ele, ind) => {
-              return (
-                <p
-                  style={{
-                    color: darkModeValue.textPrimary,
-                  }}
-                  key={"novel-overview-description" + ind + 252}
-                >
-                  {ele}
-                </p>
-              );
-            })}
-          </div>
+        <ConfigProvider
+          theme={{
+            algorithm: darkModeValue.dark
+              ? theme.darkAlgorithm
+              : theme.defaultAlgorithm,
+          }}
+        >
+          <Collapse
+            className="w-full"
+            defaultActiveKey={"1"}
+            items={[
+              {
+                key: "1",
+                label: "Description",
+                children: (
+                  <p
+                    style={{
+                      color: darkModeValue.textPrimary,
+                    }}
+                  >
+                    {data.description.map((ele, ind) => {
+                      return ele;
+                    })}
+                  </p>
+                ),
+              },
+            ]}
+          />
+        </ConfigProvider>
 
+        <div className="h-fit">
           <div className="flex flex-row gap-5 items-center flex-wrap px-2">
             {/* Novel Chapters */}
             <div className="relative w-fit flex flex-col gap-2 p-4 pr-20 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-gray-700 transition-all duration-700">

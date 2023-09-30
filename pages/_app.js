@@ -1,4 +1,4 @@
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilValue } from "recoil";
 import { ParallaxProvider } from "react-scroll-parallax";
 import "../styles/globals.css";
 
@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }) {
     <>
       <RecoilRoot>
         <ParallaxProvider>
-          <Component {...pageProps} />
+            <Component {...pageProps} />
         </ParallaxProvider>
       </RecoilRoot>
     </>
