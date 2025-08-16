@@ -64,7 +64,7 @@ export default function NovelSearchBar() {
 
           {!isFetching && debouncedSearchTerm.length > 2 && (
             <CommandEmpty>
-              No results found for "{debouncedSearchTerm}".
+              No results found for &quot;{debouncedSearchTerm}&quot;.
             </CommandEmpty>
           )}
 
