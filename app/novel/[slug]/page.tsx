@@ -12,10 +12,11 @@ import { notFound } from "next/navigation";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   try {
-    const link = "/" + params.slug;
+    const { slug } = await params;
+    const link = "/" + slug;
     const novel = await getNovelDetailsAction({ link });
 
     if (!novel || !novel.title) {
@@ -25,7 +26,7 @@ export async function generateMetadata({
       };
     }
 
-    const novelUrl = `${siteConfig.url}/novel/${params.slug}`;
+    const novelUrl = `${siteConfig.url}/novel/${slug}`;
     const title = `${novel.title} - Read Online`;
     const description = Array.isArray(novel.description)
       ? novel.description.join(" ").slice(0, 160)
