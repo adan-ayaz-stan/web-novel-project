@@ -1,0 +1,7 @@
+<!-- Placeholder Apple Touch Icon - Replace with your actual icon -->
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="180" height="180" rx="40" fill="#1A1A2E"/>
+  <path d="M45 45H135V67.5H112.5V135H90V67.5H67.5V135H45V45Z" fill="#E94560"/>
+  <circle cx="112.5" cy="90" r="11.25" fill="#533483"/>
+  <path d="M67.5 112.5L90 135L112.5 112.5L135 135V157.5L112.5 135L90 157.5L67.5 135L45 157.5V135L67.5 112.5Z" fill="#533483" opacity="0.6"/>
+</svg>

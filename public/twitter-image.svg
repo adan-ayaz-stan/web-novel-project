@@ -1,0 +1,9 @@
+<!-- Placeholder Twitter Card Image - Replace with your actual image -->
+<svg width="1200" height="600" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="600" fill="#0F0F23"/>
+  <rect x="40" y="40" width="1120" height="520" rx="15" fill="#1A1A2E"/>
+  <path d="M400 150L600 250L800 150V350L600 450L400 350V150Z" fill="#533483" opacity="0.7"/>
+  <path d="M450 200L600 280L750 200V320L600 400L450 320V200Z" fill="#E94560" opacity="0.8"/>
+  <text x="600" y="480" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Web Novel Project</text>
+  <text x="600" y="520" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#FFFFFF" opacity="0.7">Read. Discover. Explore.</text>
+</svg>

@@ -3,8 +3,78 @@
 import { getNovelDetailsAction } from "@/actions/get-novel-page";
 import Navbar from "@/components/navbar";
 import { NovelChapters } from "@/components/novel-chapters";
+import { generateNovelJsonLd, siteConfig } from "@/lib/metadata";
+import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+
+// Generate metadata for individual novel pages
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  try {
+    const link = "/" + params.slug;
+    const novel = await getNovelDetailsAction({ link });
+
+    if (!novel || !novel.title) {
+      return {
+        title: "Novel Not Found",
+        description: "The requested novel could not be found.",
+      };
+    }
+
+    const novelUrl = `${siteConfig.url}/novel/${params.slug}`;
+    const title = `${novel.title} - Read Online`;
+    const description = Array.isArray(novel.description)
+      ? novel.description.join(" ").slice(0, 160)
+      : novel.description ||
+        `Read ${novel.title} online. ${siteConfig.description}`;
+
+    return {
+      title,
+      description,
+      keywords: [
+        novel.title,
+        "light novel",
+        "web novel",
+        "read online",
+        "manga",
+        "anime",
+        ...siteConfig.keywords,
+      ],
+      openGraph: {
+        title,
+        description,
+        url: novelUrl,
+        type: "book",
+        images: [
+          {
+            url: novel.imageUrl || siteConfig.ogImage,
+            width: 1200,
+            height: 630,
+            alt: novel.title,
+          },
+        ],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        images: [novel.imageUrl || siteConfig.twitterImage],
+      },
+      alternates: {
+        canonical: novelUrl,
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Novel Not Found",
+      description: "The requested novel could not be found.",
+    };
+  }
+}
 
 /**
  * This is the inner component that performs the actual data fetching.
@@ -24,6 +94,26 @@ async function NovelDetails({ slug }: { slug: string }) {
 
     return (
       <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              generateNovelJsonLd({
+                title: novel.title,
+                description: Array.isArray(novel.description)
+                  ? novel.description.join(" ")
+                  : novel.description || "",
+                url: `${siteConfig.url}/novel/${slug}`,
+                rating: novel.metadata?.find((m) =>
+                  m.heading.toLowerCase().includes("rating")
+                )?.text,
+                status: novel.metadata?.find((m) =>
+                  m.heading.toLowerCase().includes("status")
+                )?.text,
+              })
+            ),
+          }}
+        />
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3 ">
           {/* Left Column: Image */}
           <div className="md:col-span-1">

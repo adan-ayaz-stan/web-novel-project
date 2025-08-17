@@ -1,0 +1,11 @@
+<!-- Placeholder OG Image - Replace with your actual image -->
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0F0F23"/>
+  <rect x="50" y="50" width="1100" height="530" rx="20" fill="#1A1A2E"/>
+  <circle cx="600" cy="200" r="80" fill="#16213E" opacity="0.8"/>
+  <circle cx="600" cy="200" r="60" fill="#0F3460" opacity="0.8"/>
+  <circle cx="600" cy="200" r="40" fill="#533483" opacity="0.8"/>
+  <text x="600" y="320" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#E94560">Web Novel Project</text>
+  <text x="600" y="380" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#FFFFFF" opacity="0.8">Discover and Read Light Novels</text>
+  <text x="600" y="420" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#FFFFFF" opacity="0.6">Explore trending stories and find your next adventure</text>
+</svg>
