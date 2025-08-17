@@ -9,15 +9,16 @@ import { notFound } from "next/navigation";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string; chapter: string };
+  params: Promise<{ slug: string; chapter: string }>;
 }): Promise<Metadata> {
   try {
+    const { slug, chapter } = await params;
     // Reconstruct the full path that the scraper expects
-    const pageRoute = `/${params.slug}/${params.chapter}`;
-    const chapter = await getChapterContentAction({ pageRoute });
+    const pageRoute = `/${slug}/${chapter}`;
+    const chapterContent = await getChapterContentAction({ pageRoute });
 
     return {
-      title: chapter.title,
+      title: chapterContent.title,
     };
   } catch (error) {
     return {
@@ -30,10 +31,11 @@ export async function generateMetadata({
 export default async function ChapterPage({
   params,
 }: {
-  params: { slug: string; chapter: string };
+  params: Promise<{ slug: string; chapter: string }>;
 }) {
+  const { slug, chapter } = await params;
   // Reconstruct the full path from the slug and chapter params
-  const pageRoute = `/${params.slug}/${params.chapter}`;
+  const pageRoute = `/${slug}/${chapter}`;
 
   try {
     const chapterDetails = await getChapterContentAction({ pageRoute });
