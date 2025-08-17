@@ -5,6 +5,6 @@ export default defineConfig({
   schema: "./lib/schema.ts",
   out: "./drizzle",
   dbCredentials: {
-    url: "./sqlite.db",
+    url: `libsql://web-novel-project-spitfire.aws-eu-west-1.turso.io?authToken=${process.env.TURSO_DB_TOKEN}`,
   },
 });
