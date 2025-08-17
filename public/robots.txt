@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://spitfirenovelpub.vercel.app/sitemap.xml
 
 # Disallow crawling of API routes and admin areas
 Disallow: /api/

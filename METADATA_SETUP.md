@@ -79,7 +79,7 @@ verification: {
 
 ### 5. Update Domain References
 
-Replace `https://your-domain.com` with your actual domain in:
+Replace `https://spitfirenovelpub.vercel.app` with your actual domain in:
 
 - `lib/metadata.ts`
 - `public/robots.txt`

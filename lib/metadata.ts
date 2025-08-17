@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://your-domain.com";
+const baseUrl =
+  process.env.NEXT_PUBLIC_BASE_URL || "https://spitfirenovelpub.vercel.app";
 
 export const siteConfig = {
   name: "Web Novel Project",
