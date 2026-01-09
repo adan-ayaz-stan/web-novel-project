@@ -99,9 +99,11 @@ NEXT_PUBLIC_BASE_URL=https://your-domain.com
 
 **How to get `TURSO_DB_TOKEN`:**
 1. Sign up at [turso.tech](https://turso.tech)
-2. Create a new database
-3. Run `turso db tokens create <database-name>` to generate a token
-4. The database URL is already configured in `lib/db.ts` and `drizzle.config.ts`
+2. Install Turso CLI: `curl -sSfL https://get.tur.so/install.sh | bash`
+3. Create a new database: `turso db create web-novel-project`
+4. Generate a token: `turso db tokens create web-novel-project`
+5. Copy the token to your `.env` file
+6. The database URL is already configured in `lib/db.ts` and `drizzle.config.ts`
 
 ### Installation Steps
 
@@ -134,7 +136,7 @@ pnpm start
 - **No Mobile-Optimized Reader** – Chapter view needs better typography scaling and gesture navigation for mobile devices.
 
 ### Technical Debt
-- **Fragile Scraping** – Dependent on external site's HTML structure. If selectors change, scraping breaks. Consider API alternatives or maintaining selector version compatibility.
+- **Fragile Scraping** – Dependent on external site's HTML structure. If selectors change, scraping breaks. Consider API alternatives or implementing fallback selectors to handle DOM structure changes.
 - **No Error Recovery** – Failed scrapes show generic errors. Add retry logic with exponential backoff.
 - **Missing Loading States** – Some components lack Suspense boundaries, causing layout shift during data fetching.
 - **No Performance Monitoring** – Add Vercel Analytics or Sentry for tracking Core Web Vitals and scraping failures.
